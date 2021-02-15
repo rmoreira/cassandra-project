@@ -1,8 +1,12 @@
 # Cassandra with Python (and Flask) in docker-composer:
 
-This repository shows how to stand a three-node Cassandra cluster and Flask webserver to display the data in the Cassandra database.
+This repository shows how to stand a three-node Cassandra cluster and Flask webserver to display the data from the database.
 The scripts in the init-scripts folder creates a keyspace called "sampledata", sets replication to 2, and initializes the database with some data, in this case, the index number and name of the months.
 
+## Video
+if you want to follow along by wachting the video below:
+
+[![demo video](http://img.youtube.com/vi/50wx7WEZB4U/0.jpg)](https://www.youtube.com/watch?v=50wx7WEZB4U "Cassandra with Python (and Flask) in docker-composer")
 
 ## Steps:
 
