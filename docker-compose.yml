@@ -1,0 +1,38 @@
+version: '2'
+services:
+  cassandra-node1:
+    image: bitnami/cassandra:latest
+    volumes:
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    environment:
+      - CASSANDRA_CLUSTER_NAME=cassandra-cluster
+      - CASSANDRA_SEEDS=cassandra-node1,cassandra-node2,cassandra-node3
+      - CASSANDRA_PASSWORD_SEEDER=yes
+      - CASSANDRA_PASSWORD=password123
+      - CASSANDRA_DATACENTER=datacenter1
+
+  cassandra-node2:
+    image: bitnami/cassandra:latest
+    environment:
+      - CASSANDRA_CLUSTER_NAME=cassandra-cluster
+      - CASSANDRA_SEEDS=cassandra-node1,cassandra-node2,cassandra-node3
+      - CASSANDRA_PASSWORD=password123
+      - CASSANDRA_DATACENTER=datacenter1
+
+  cassandra-node3:
+    image: bitnami/cassandra:latest
+    environment:
+      - CASSANDRA_CLUSTER_NAME=cassandra-cluster
+      - CASSANDRA_SEEDS=cassandra-node1,cassandra-node2,cassandra-node3
+      - CASSANDRA_PASSWORD=password123
+      - CASSANDRA_DATACENTER=datacenter1
+
+  web-app:
+    build: .
+    environment:
+      - CASSANDRA_SEEDS=cassandra-node1,cassandra-node2,cassandra-node3
+      - CASSANDRA_PASSWORD=password123
+    ports:
+      - 5555:5555
+    depends_on:
+      - cassandra-node1
